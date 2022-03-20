@@ -11,7 +11,7 @@ import { setName } from "slices/userSlice";
 
 const theme = createTheme();
 
-export const Registration: VFC = () => {
+export const RegistrationForm: VFC = () => {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
 
