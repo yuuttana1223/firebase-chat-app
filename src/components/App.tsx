@@ -1,6 +1,11 @@
+import { store } from "app/store";
 import { Registration } from "components/Registration";
-import { useState } from "react";
+import { Provider } from "react-redux";
 
 export const App = () => {
-  return <Registration />;
+  return (
+    <Provider store={store}>
+      <Registration />
+    </Provider>
+  );
 };
