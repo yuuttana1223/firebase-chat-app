@@ -1,11 +1,14 @@
-import { store } from "app/store";
+import { useAppSelector } from "app/hooks";
 import { Registration } from "components/Registration";
-import { Provider } from "react-redux";
+import { selectName } from "slices/userSlice";
+import { Main } from "components/Main";
 
 export const App = () => {
-  return (
-    <Provider store={store}>
-      <Registration />
-    </Provider>
-  );
+  const name = useAppSelector(selectName);
+
+  if (!name) {
+    return <Registration />;
+  }
+
+  return <Main />;
 };
