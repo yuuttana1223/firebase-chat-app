@@ -4,8 +4,8 @@ import { VFC, useState, useCallback, ChangeEvent, FormEvent } from "react";
 import { useAppSelector } from "src/app/hooks";
 import { getGravatarUrl } from "src/utils/gravatar";
 import { MessageTextField } from "src/components/Input/MessageTextField";
-import { writeMessageData } from "src/firebase/config";
 import { selectName } from "src/slices/userSlice";
+import { createMessageData } from "src/firebase/database";
 
 const Form = styled("form")({
   gridRow: "2",
@@ -26,7 +26,7 @@ export const MessageForm: VFC = () => {
       if (!text) {
         return;
       }
-      writeMessageData(text, name);
+      createMessageData(text, name);
       setText("");
     },
     [name, text]
