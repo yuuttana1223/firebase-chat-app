@@ -6,9 +6,9 @@ import { RegistrationForm } from "components/Form/RegistrationForm";
 export const App = () => {
   const name = useAppSelector(selectName);
 
-  if (!name) {
-    return <RegistrationForm />;
-  }
+  // if (!name) {
+  //   return <RegistrationForm />;
+  // }
 
   return <MainPage />;
 };
