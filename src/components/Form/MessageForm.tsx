@@ -24,7 +24,7 @@ export const MessageForm: VFC = () => {
   const name = useAppSelector(selectName);
   const avatarUrl = getGravatarUrl(name);
   const [text, setText] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputEl = useRef<HTMLInputElement>(null);
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   }, []);
@@ -37,12 +37,10 @@ export const MessageForm: VFC = () => {
       }
       createMessageData(text, name);
       setText("");
-      inputRef.current?.focus();
+      inputEl.current?.focus();
     },
     [name, text]
   );
-
-  console.log(inputRef);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -53,7 +51,7 @@ export const MessageForm: VFC = () => {
         <Grid item xs={10}>
           <MessageTextField
             text={text}
-            inputRef={inputRef}
+            inputRef={inputEl}
             onChange={handleChange}
           />
         </Grid>
