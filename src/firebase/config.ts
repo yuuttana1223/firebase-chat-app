@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getDatabase, set, ref } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDpm0iSVGFvz3L-Cj6c_v1o3ySzlZmMBVw",
@@ -10,4 +11,12 @@ const firebaseConfig = {
   appId: "1:455625934371:web:caa3aba5a0b8480b9cd396",
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+export const db = getDatabase(app);
+
+export const writeMessageData = (message: string, username: string) => {
+  set(ref(db, "messages"), {
+    message,
+    username,
+  });
+};

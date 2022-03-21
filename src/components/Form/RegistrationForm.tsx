@@ -6,8 +6,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useAppDispatch } from "app/hooks";
-import { setName } from "slices/userSlice";
+import { useAppDispatch } from "src/app/hooks";
+import { setName } from "src/slices/userSlice";
 
 const theme = createTheme();
 

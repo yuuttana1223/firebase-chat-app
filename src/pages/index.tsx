@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
-import { MessageForm } from "components/Form/MessageForm";
-import { MessageList } from "components/Model/Message/MessageList";
 import { VFC } from "react";
+import { MessageForm } from "src/components/Form/MessageForm";
+import { MessageList } from "src/components/Model/Message/MessageList";
 
 const Container = styled("div")({
   display: "grid",

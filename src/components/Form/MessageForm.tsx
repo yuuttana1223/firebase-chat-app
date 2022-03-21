@@ -1,10 +1,11 @@
 import { Avatar, Grid } from "@mui/material";
 import { styled } from "@mui/system";
-import { useAppSelector } from "app/hooks";
 import { VFC, useState, useCallback, ChangeEvent, FormEvent } from "react";
-import { selectName } from "slices/userSlice";
-import { getGravatarUrl } from "utils/gravatar";
-import { MessageTextField } from "components/Input/MessageTextField";
+import { useAppSelector } from "src/app/hooks";
+import { getGravatarUrl } from "src/utils/gravatar";
+import { MessageTextField } from "src/components/Input/MessageTextField";
+import { writeMessageData } from "src/firebase/config";
+import { selectName } from "src/slices/userSlice";
 
 const Form = styled("form")({
   gridRow: "2",
@@ -25,10 +26,10 @@ export const MessageForm: VFC = () => {
       if (!text) {
         return;
       }
+      writeMessageData(text, name);
       setText("");
-      console.log(text);
     },
-    [text]
+    [name, text]
   );
 
   return (
