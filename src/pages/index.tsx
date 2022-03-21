@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { MessageTextField } from "components/Input/MessageTextField";
+import { MessageForm } from "components/Form/MessageForm";
 import { MessageList } from "components/Model/Message/MessageList";
 import { VFC } from "react";
 
@@ -13,7 +13,7 @@ export const MainPage: VFC = () => {
   return (
     <Container>
       <MessageList />
-      <MessageTextField />
+      <MessageForm />
     </Container>
   );
 };

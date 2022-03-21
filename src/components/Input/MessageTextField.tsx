@@ -1,32 +1,13 @@
-import { Avatar, Grid } from "@mui/material";
-import { styled } from "@mui/system";
-import { useAppSelector } from "app/hooks";
-import { VFC } from "react";
-import { selectName } from "slices/userSlice";
-import { getGravatarUrl } from "utils/gravatar";
+import { TextField } from "@mui/material";
+import { VFC, ChangeEvent } from "react";
 
-const Wrapper = styled("div")({
-  gridRow: "2",
-  margin: "26px",
-});
+type Props = {
+  text: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-export const MessageTextField: VFC = () => {
-  const name = useAppSelector(selectName);
-  const avatarUrl = getGravatarUrl(name);
-
+export const MessageTextField: VFC<Props> = ({ text, onChange }) => {
   return (
-    <Wrapper>
-      <Grid container>
-        <Grid item xs={1}>
-          <Avatar src={avatarUrl} />
-        </Grid>
-        <Grid item xs={10}>
-          入力
-        </Grid>
-        <Grid item xs={1}>
-          ボタン
-        </Grid>
-      </Grid>
-    </Wrapper>
+    <TextField variant="standard" fullWidth value={text} onChange={onChange} />
   );
 };
