@@ -1,11 +1,19 @@
 import { Avatar, Grid } from "@mui/material";
 import { styled } from "@mui/system";
-import { VFC, useState, useCallback, ChangeEvent, FormEvent } from "react";
+import {
+  VFC,
+  useState,
+  useCallback,
+  ChangeEvent,
+  FormEvent,
+  useRef,
+} from "react";
 import { useAppSelector } from "src/app/hooks";
 import { getGravatarUrl } from "src/utils/gravatar";
 import { MessageTextField } from "src/components/Input/MessageTextField";
 import { selectName } from "src/slices/userSlice";
 import { createMessageData } from "src/firebase/database";
+import { SubmitButton } from "src/components/Button/SubmitButton";
 
 const Form = styled("form")({
   gridRow: "2",
@@ -16,6 +24,7 @@ export const MessageForm: VFC = () => {
   const name = useAppSelector(selectName);
   const avatarUrl = getGravatarUrl(name);
   const [text, setText] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   }, []);
@@ -28,9 +37,12 @@ export const MessageForm: VFC = () => {
       }
       createMessageData(text, name);
       setText("");
+      inputRef.current?.focus();
     },
     [name, text]
   );
+
+  console.log(inputRef);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -39,10 +51,14 @@ export const MessageForm: VFC = () => {
           <Avatar src={avatarUrl} />
         </Grid>
         <Grid item xs={10}>
-          <MessageTextField text={text} onChange={handleChange} />
+          <MessageTextField
+            text={text}
+            inputRef={inputRef}
+            onChange={handleChange}
+          />
         </Grid>
         <Grid item xs={1}>
-          ボタン
+          <SubmitButton disabled={!text} />
         </Grid>
       </Grid>
     </Form>
