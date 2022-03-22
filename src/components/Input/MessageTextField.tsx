@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { VFC, ChangeEvent, RefObject } from "react";
+import { VFC, ChangeEvent, RefObject, memo } from "react";
 
 type Props = {
   text: string;
@@ -7,15 +7,19 @@ type Props = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const MessageTextField: VFC<Props> = ({ text, inputRef, onChange }) => {
-  return (
-    <TextField
-      variant="standard"
-      fullWidth
-      value={text}
-      inputRef={inputRef}
-      autoFocus
-      onChange={onChange}
-    />
-  );
-};
+export const MessageTextField: VFC<Props> = memo(
+  ({ text, inputRef, onChange }) => {
+    return (
+      <TextField
+        variant="standard"
+        fullWidth
+        value={text}
+        inputRef={inputRef}
+        autoFocus
+        onChange={onChange}
+      />
+    );
+  }
+);
+
+MessageTextField.displayName = "MessageTextField";

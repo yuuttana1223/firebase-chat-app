@@ -1,4 +1,4 @@
-import { VFC, useState, FormEvent } from "react";
+import { VFC, useState, FormEvent, memo } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -11,7 +11,7 @@ import { setName } from "src/slices/userSlice";
 
 const theme = createTheme();
 
-export const RegistrationForm: VFC = () => {
+export const RegistrationForm: VFC = memo(() => {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
 
@@ -80,4 +80,6 @@ export const RegistrationForm: VFC = () => {
       </Container>
     </ThemeProvider>
   );
-};
+});
+
+RegistrationForm.displayName = "RegistrationForm";

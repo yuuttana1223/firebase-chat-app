@@ -14,13 +14,14 @@ import { MessageTextField } from "src/components/Input/MessageTextField";
 import { selectName } from "src/slices/userSlice";
 import { createMessageData } from "src/firebase/database";
 import { SubmitButton } from "src/components/Button/SubmitButton";
+import { memo } from "react";
 
 const Form = styled("form")({
   gridRow: "2",
   margin: "26px",
 });
 
-export const MessageForm: VFC = () => {
+export const MessageForm: VFC = memo(() => {
   const name = useAppSelector(selectName);
   const avatarUrl = getGravatarUrl(name);
   const [text, setText] = useState("");
@@ -61,4 +62,6 @@ export const MessageForm: VFC = () => {
       </Grid>
     </Form>
   );
-};
+});
+
+MessageForm.displayName = "MessageForm";
