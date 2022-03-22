@@ -1,44 +1,34 @@
 import { List } from "@mui/material";
 import { styled } from "@mui/system";
-import { onValue } from "firebase/database";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import { VFC } from "react";
-import { useAppDispatch, useAppSelector } from "src/app/hooks";
 import { MessageItem } from "src/components/Model/Message/MessageItem";
-import { messagesQuery } from "src/firebase/database";
-import { Message } from "src/types/message";
-import { setMessages, selectMessages } from "src/slices/messageSlice";
+import { useMessages } from "src/hooks/useMessages";
+import { MessageState } from "src/slices/messageSlice";
 
 const Wrapper = styled("div")({
   gridRow: "1",
 });
 
 export const MessageList: VFC = memo(() => {
-  const dispatch = useAppDispatch();
-  const messages = useAppSelector(selectMessages);
+  const { messages, isLoading, isError } = useMessages();
+  console.log(
+    "🚀 ~ file: MessageList.tsx ~ line 15 ~ constMessageList:VFC=memo ~ messages",
+    messages
+  );
 
-  useEffect(() => {
-    onValue(messagesQuery, (snapshot) => {
-      const messages: { [key: string]: Message } = snapshot.val();
-      if (!messages) {
-        return;
-      }
-      const entries = Object.entries(messages);
-      const newMessages = entries.map((entry) => {
-        const [key, message] = entry;
-        return {
-          key,
-          message,
-        };
-      });
-      dispatch(setMessages({ messages: newMessages }));
-    });
-  }, [dispatch]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   return (
     <Wrapper>
       <List>
-        {messages?.map(({ key, message }) => (
+        {messages?.map(({ key, message }: MessageState) => (
           <MessageItem key={key} message={message} />
         ))}
       </List>

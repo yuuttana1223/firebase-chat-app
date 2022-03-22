@@ -20,10 +20,6 @@ export const messagesQuery = query(
 
 export const createMessageData = (body: string, username: string) => {
   const newMessageRef = push(messageListRef);
-  console.log(
-    "🚀 ~ file: database.ts ~ line 23 ~ createMessageData ~ newMessageRef",
-    newMessageRef
-  );
   set(newMessageRef, {
     body,
     username,

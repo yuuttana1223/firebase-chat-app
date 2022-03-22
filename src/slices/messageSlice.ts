@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "src/app/store";
 import { Message } from "src/types/message";
 
-type MessageState = {
+export type MessageState = {
   key: string;
   message: Message;
 };
