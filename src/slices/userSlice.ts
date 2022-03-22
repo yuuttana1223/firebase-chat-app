@@ -1,17 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "src/app/store";
 
-export type UserState = {
-  name: string;
-};
-
-const initialState: UserState = {
-  name: "",
-};
-
 export const userSlice = createSlice({
   name: "user",
-  initialState,
+  initialState: {
+    name: "",
+  },
   reducers: {
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
