@@ -15,7 +15,7 @@ const messageListRef = ref(db, "messages");
 export const messagesQuery = query(
   messageListRef,
   orderByKey(),
-  limitToLast(3)
+  limitToLast(15)
 );
 
 export const createMessageData = (body: string, username: string) => {

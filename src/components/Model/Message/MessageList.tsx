@@ -8,14 +8,11 @@ import { MessageState } from "src/slices/messageSlice";
 
 const Wrapper = styled("div")({
   gridRow: "1",
+  overflow: "auto",
 });
 
 export const MessageList: VFC = memo(() => {
   const { messages, isLoading, isError } = useMessages();
-  console.log(
-    "🚀 ~ file: MessageList.tsx ~ line 15 ~ constMessageList:VFC=memo ~ messages",
-    messages
-  );
 
   if (isLoading) {
     return <div>Loading...</div>;

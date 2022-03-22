@@ -16,10 +16,8 @@ type Props = {
 export const MessageItem: VFC<Props> = ({ message }) => {
   const avatarUrl = getGravatarUrl(message.username);
 
-  console.log(message);
-
   return (
-    <ListItem alignItems="flex-start">
+    <ListItem divider alignItems="flex-start">
       <ListItemAvatar>
         <Avatar alt="avatar" src={avatarUrl} />
       </ListItemAvatar>
