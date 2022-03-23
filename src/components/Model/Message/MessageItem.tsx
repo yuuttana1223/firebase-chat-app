@@ -5,19 +5,27 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { VFC } from "react";
+import { VFC, memo, useRef, useEffect } from "react";
 import { Message } from "src/types/message";
 import { getGravatarUrl } from "src/utils/gravatar";
 
 type Props = {
   message: Message;
+  isLastItem: boolean;
 };
 
-export const MessageItem: VFC<Props> = ({ message }) => {
+export const MessageItem: VFC<Props> = memo(({ message, isLastItem }) => {
+  const ref = useRef<HTMLLIElement>(null);
   const avatarUrl = getGravatarUrl(message.username);
 
+  useEffect(() => {
+    if (isLastItem && ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isLastItem]);
+
   return (
-    <ListItem divider alignItems="flex-start">
+    <ListItem divider alignItems="flex-start" ref={ref}>
       <ListItemAvatar>
         <Avatar alt="avatar" src={avatarUrl} />
       </ListItemAvatar>
@@ -36,4 +44,6 @@ export const MessageItem: VFC<Props> = ({ message }) => {
       />
     </ListItem>
   );
-};
+});
+
+MessageItem.displayName = "MessageItem";

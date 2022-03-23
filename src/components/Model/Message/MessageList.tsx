@@ -6,7 +6,7 @@ import { MessageItem } from "src/components/Model/Message/MessageItem";
 import { useMessages } from "src/hooks/useMessages";
 import { MessageState } from "src/slices/messageSlice";
 
-const Wrapper = styled("div")({
+const ListWrapper = styled("div")({
   gridRow: "1",
   overflow: "auto",
 });
@@ -23,13 +23,17 @@ export const MessageList: VFC = memo(() => {
   }
 
   return (
-    <Wrapper>
+    <ListWrapper>
       <List>
-        {messages?.map(({ key, message }: MessageState) => (
-          <MessageItem key={key} message={message} />
+        {messages?.map(({ key, message }: MessageState, index) => (
+          <MessageItem
+            key={key}
+            message={message}
+            isLastItem={messages.length - 1 === index}
+          />
         ))}
       </List>
-    </Wrapper>
+    </ListWrapper>
   );
 });
 
